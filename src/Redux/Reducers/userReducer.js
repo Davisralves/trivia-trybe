@@ -48,7 +48,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       player: {
-        ...action.player,
+        ...action.payload.player,
         score: action.payload.player.score,
         assertions: action.payload.player.assertions + 1,
       },
