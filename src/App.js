@@ -13,11 +13,11 @@ class App extends Component {
       <Switch>
         <main className="App">
           <header className="App-header">
-            <Feedback />
             <img src={ logo } className="App-logo" alt="logo" />
             <Route exact path="/" component={ Login } />
             <Route exact path="/settings" component={ Settings } />
             <Route path="/game" component={ Game } />
+            <Route path="/feedback" component={ Feedback } />
           </header>
         </main>
       </Switch>

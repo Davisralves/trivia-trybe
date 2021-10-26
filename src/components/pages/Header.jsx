@@ -16,7 +16,7 @@ class Header extends Component {
   }
 
   render() {
-    const { player, emailPLayer, score } = this.props;
+    const { player, emailPLayer, score, assertions } = this.props;
     return (
       <header>
         <img
