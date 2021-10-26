@@ -34,3 +34,8 @@ export const requestTriviaApi = async (questionUrl) => { // questionUrl opcional
     return (await tokeIsValid).questionObject;
   }
 };
+
+export const saveScore = (score) => {
+  const player = JSON.stringify(score);
+  localStorage.setItem('player', player);
+};

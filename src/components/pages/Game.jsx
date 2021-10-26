@@ -21,12 +21,15 @@ export default class Game extends Component {
         ],
       },
       index: 0,
+      clicked: false,
+      answer: '',
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
     this.printQuestions = this.printQuestions.bind(this);
     this.renderButton = this.renderButton.bind(this);
     this.changeBorderColor = this.changeBorderColor.bind(this);
+    this.setClickedFalse = this.setClickedFalse.bind(this);
   }
 
   async componentDidMount() {
@@ -36,12 +39,9 @@ export default class Game extends Component {
     setTimeout(() => this.setState({ disable: true }), timeOut);
   }
 
-  setQuestionState(questions) { return this.setState({ questions }); }
+  setClickedFalse() { this.setState({ clicked: false }); }
 
-  sortArray(array) {
-    const fiftyPercent = 0.5;
-    return array.sort(() => Math.random() - fiftyPercent);
-  }
+  setQuestionState(questions) { return this.setState({ questions }); }
 
   printQuestions(correctAnswer, incorrectAnswers, type, disable) {
     const { renderButton, sortArray } = this;
@@ -68,10 +68,17 @@ export default class Game extends Component {
     return sortArray(arrayWithDataTest);
   }
 
-  changeBorderColor() {
+  changeBorderColor({ target }) {
     this.setState({
       disable: true,
+      clicked: true,
+      answer: target.className,
     });
+  }
+
+  sortArray(array) {
+    const fiftyPercent = 0.5;
+    return array.sort(() => Math.random() - fiftyPercent);
   }
 
   renderButton(dataTest, index, anwser, disable) {
@@ -91,16 +98,22 @@ export default class Game extends Component {
   }
 
   render() {
-    const { questions: { results }, index, disable } = this.state;
+    const { questions: { results }, index, disable, clicked, answer } = this.state;
     const {
       category,
       type,
       question,
       correct_answer: correctAnswer,
-      incorrect_answers: incorrectAnswers } = results[index];
+      incorrect_answers: incorrectAnswers,
+      difficulty } = results[index];
     return (
       <main>
-        <Timer />
+        <Timer
+          difficulty={ difficulty }
+          clicked={ clicked }
+          setClickedFalse={ this.setClickedFalse }
+          answer={ answer }
+        />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>
           <p data-testid="question-text">{question}</p>
