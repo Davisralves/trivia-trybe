@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { requestTriviaApi } from '../../services/Api';
 import './Game.css';
@@ -134,7 +135,13 @@ export default class Game extends Component {
   }
 
   render() {
-    const { questions: { results }, index, disable, correctClick, answer, clicked } = this.state;
+    const {
+      questions: { results },
+      index,
+      disable,
+      correctClick,
+      answer,
+      clicked } = this.state;
     const {
       category,
       type,
@@ -162,3 +169,9 @@ export default class Game extends Component {
     );
   }
 }
+
+Game.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
