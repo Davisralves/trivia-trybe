@@ -21,8 +21,9 @@ export default class Game extends Component {
         ],
       },
       index: 0,
-      clicked: false,
+      correctClick: false,
       answer: '',
+      clicked: false,
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -30,18 +31,46 @@ export default class Game extends Component {
     this.renderButton = this.renderButton.bind(this);
     this.changeBorderColor = this.changeBorderColor.bind(this);
     this.setClickedFalse = this.setClickedFalse.bind(this);
+    this.handleNextQuestion = this.handleNextQuestion.bind(this);
+    this.nextButton = this.nextButton.bind(this);
   }
 
   async componentDidMount() {
     const timeOut = 30000;
     const questions = await requestTriviaApi();
     this.setQuestionState(questions);
-    setTimeout(() => this.setState({ disable: true }), timeOut);
+    setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
   }
 
-  setClickedFalse() { this.setState({ clicked: false }); }
+  setClickedFalse() { this.setState({ correctClick: false }); }
 
   setQuestionState(questions) { return this.setState({ questions }); }
+
+  handleNextQuestion() {
+    const { history } = this.props;
+    const { index } = this.state;
+    const maxLimit = 3;
+    console.log(index);
+    if (index <= maxLimit) {
+      this.setState((prevState) => ({
+        index: prevState.index + 1,
+        disable: false,
+        clicked: false,
+      }));
+    } else { history.push('/feedback'); }
+  }
+
+  nextButton() {
+    return (
+      <button
+        type="button"
+        data-testid="btn-next"
+        onClick={ this.handleNextQuestion }
+      >
+        Próxima
+      </button>
+    );
+  }
 
   printQuestions(correctAnswer, incorrectAnswers, type, disable) {
     const { renderButton, sortArray } = this;
@@ -71,6 +100,7 @@ export default class Game extends Component {
   changeBorderColor({ target }) {
     this.setState({
       disable: true,
+      correctClick: true,
       clicked: true,
       answer: target.className,
     });
@@ -98,7 +128,7 @@ export default class Game extends Component {
   }
 
   render() {
-    const { questions: { results }, index, disable, clicked, answer } = this.state;
+    const { questions: { results }, index, disable, correctClick, answer, clicked } = this.state;
     const {
       category,
       type,
@@ -110,7 +140,7 @@ export default class Game extends Component {
       <main>
         <Timer
           difficulty={ difficulty }
-          clicked={ clicked }
+          correctClick={ correctClick }
           setClickedFalse={ this.setClickedFalse }
           answer={ answer }
         />
@@ -120,6 +150,7 @@ export default class Game extends Component {
         </div>
         <div>
           {this.printQuestions(correctAnswer, incorrectAnswers, type, disable)}
+          { clicked ? this.nextButton() : <span /> }
         </div>
       </main>
     );

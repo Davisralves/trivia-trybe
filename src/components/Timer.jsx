@@ -47,14 +47,14 @@ class Timer extends Component {
   render() {
     const {
       difficulty,
-      clicked,
+      correctClick,
       setClickedFalse,
       dispatchCount,
       answer,
       player } = this.props;
     const { counter } = this.state;
     const score = this.points(counter, difficulty);
-    if (clicked) {
+    if (correctClick) {
       player.score += score;
       player.assertions += 1;
       saveScore(player);
