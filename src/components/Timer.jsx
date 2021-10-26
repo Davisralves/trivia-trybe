@@ -75,7 +75,7 @@ class Timer extends Component {
 
 Timer.propTypes = {
   answer: PropTypes.string.isRequired,
-  clicked: PropTypes.bool.isRequired,
+  correctClick: PropTypes.bool.isRequired,
   difficulty: PropTypes.number.isRequired,
   dispatchCount: PropTypes.func.isRequired,
   player: PropTypes.shape({

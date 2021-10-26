@@ -33,24 +33,30 @@ export default class Game extends Component {
     this.setClickedFalse = this.setClickedFalse.bind(this);
     this.handleNextQuestion = this.handleNextQuestion.bind(this);
     this.nextButton = this.nextButton.bind(this);
+    this.setTimer30seg = this.setTimer30seg.bind(this);
   }
 
   async componentDidMount() {
-    const timeOut = 30000;
     const questions = await requestTriviaApi();
     this.setQuestionState(questions);
-    setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
+    this.setTimer30seg();
   }
 
   setClickedFalse() { this.setState({ correctClick: false }); }
 
   setQuestionState(questions) { return this.setState({ questions }); }
 
+  setTimer30seg() {
+    const timeOut = 30000;
+    clearTimeout();
+    setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
+  }
+
   handleNextQuestion() {
     const { history } = this.props;
     const { index } = this.state;
     const maxLimit = 3;
-    console.log(index);
+    this.setTimer30seg();
     if (index <= maxLimit) {
       this.setState((prevState) => ({
         index: prevState.index + 1,
