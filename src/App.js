@@ -12,6 +12,7 @@ class App extends Component {
     return (
       <Switch>
         <main className="App">
+          <Feedback />
           <header className="App-header">
             <img src={ logo } className="App-logo" alt="logo" />
             <Route exact path="/" component={ Login } />
