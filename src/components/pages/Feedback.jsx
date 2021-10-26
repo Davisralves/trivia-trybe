@@ -45,8 +45,8 @@ Feedback.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  score: state.userReducer.score,
-  assertions: state.userReducer.assertions,
+  score: state.userReducer.player.score,
+  assertions: state.userReducer.player.assertions,
 });
 
 export default connect(

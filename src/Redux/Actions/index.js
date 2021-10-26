@@ -14,3 +14,8 @@ export const SET_BUTTON_COLLOR = 'SET_BUTTON_COLLOR';
 export const setButtonColoor = (payload) => ({
   type: SET_BUTTON_COLLOR, payload,
 });
+
+export const SET_SCORE = 'SET_SCORE';
+export const setScore = (payload) => ({
+  type: SET_SCORE, payload,
+});

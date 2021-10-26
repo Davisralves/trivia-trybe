@@ -1,11 +1,14 @@
-import { SET_USER_DATA, SET_FEEDBACK, SET_BUTTON_COLLOR } from '../Actions/index';
+import {
+  SET_USER_DATA,
+  SET_FEEDBACK,
+  SET_BUTTON_COLLOR,
+  SET_SCORE } from '../Actions/index';
 
 const INITIAL_STATE = {
-  login: '',
   email: '',
   player: {
     name: '',
-    assertions: '',
+    assertions: 0,
     score: 0,
     gravatarEmail: '',
   },
@@ -16,21 +19,21 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
+  console.log(action);
   switch (action.type) {
   case SET_USER_DATA:
     return {
       ...state,
-      name: action.payload,
-      email: action.payload,
+      name: action.payload.name,
+      email: action.payload.email,
     };
   case SET_FEEDBACK:
     return {
       ...state,
       player: {
-        name: action.payload,
-        assertions: action.payload,
-        score: action.payload,
-        gravatarEmail: action.payload,
+        ...state.player,
+        name: action.payload.name,
+        gravatarEmail: action.payload.email,
       },
     };
   case SET_BUTTON_COLLOR:
@@ -39,6 +42,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
       colors: {
         wrongColor: action.payload,
         rigthColor: action.payload,
+      },
+    };
+  case SET_SCORE:
+    return {
+      ...state,
+      player: {
+        ...action.payload.player,
+        score: action.payload.player.score,
+        assertions: action.payload.player.assertions,
       },
     };
   default:

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { setuserdata } from '../../Redux/Actions';
+import { setfeedback } from '../../Redux/Actions';
 import { requestToken } from '../../services/Api';
 import getGravatar from '../../services/getGravatar';
 import Buttons from '../Buttons';
@@ -28,9 +28,9 @@ class Login extends Component {
   }
 
   async handleClick(path) {
-    const { name, email } = this.state;
+    const { email } = this.state;
     const { dispatchSetValue, history } = this.props;
-    dispatchSetValue(name, email);
+    dispatchSetValue(this.state);
     await requestToken();
     getGravatar(email);
     history.push(path);
@@ -83,7 +83,7 @@ class Login extends Component {
 
 const mapDipatchToProps = (dispatch) => ({
   dispatchSetValue: (state) => {
-    dispatch(setuserdata(state));
+    dispatch(setfeedback(state));
   },
 });
 
