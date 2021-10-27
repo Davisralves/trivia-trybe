@@ -1,9 +1,9 @@
-@import url('https://unpkg.com/papercss@1.8.2/dist/paper.min.css');
+@import url('https://unpkg.com/papercss@1.8.2/dist/paper.min.css') ;
 
 .App {
-  text-align: center;
   margin: 0 auto;
   padding: 0 auto;
+  text-align: center;
 }
 
 .App-logo {
@@ -12,18 +12,18 @@
 }
 
 .input-login {
+  left: 50%;
   position: absolute;
   top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .name-input {
-  display: flex;
-  margin-top: 6px;
-  margin-left: 150px;
-  text-align: center;
   align-items: center;
+  display: flex;
+  margin-left: 150px;
+  margin-top: 6px;
+  text-align: center;
 }
 
 .inputs {
@@ -33,11 +33,6 @@
 .buttons-login {
   margin: 6px;
 }
-
-/* 
-.gameNext:hover {
-
-} */
 
 .score {
   color: green;
@@ -55,12 +50,12 @@
 }
 
 .gravatal-img {
-  display: flex;
-  justify-content: space-between;
-  min-width: 30%;
-  font-size: medium;
   align-items: center;
+  display: flex;
+  font-size: medium;
+  justify-content: space-between;
   margin-bottom: 30px;
+  min-width: 30%;
 }
 
 .red-border {
