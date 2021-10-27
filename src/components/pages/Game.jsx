@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { requestTriviaApi } from '../../services/Api';
 import './Game.css';
 import Timer from '../Timer';
+import Header from './Header';
 
 export default class Game extends Component {
   constructor() {
@@ -151,6 +152,7 @@ export default class Game extends Component {
       difficulty } = results[index];
     return (
       <main>
+        <Header />
         <Timer
           difficulty={ difficulty }
           correctClick={ correctClick }

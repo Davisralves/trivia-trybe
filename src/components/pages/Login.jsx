@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import logo from '../../7FbY.gif';
 import { setfeedback } from '../../Redux/Actions';
 import { requestToken } from '../../services/Api';
 import getGravatar from '../../services/getGravatar';
@@ -39,43 +40,49 @@ class Login extends Component {
   render() {
     const { name, email } = this.state;
     return (
-      <section className="input-login">
-        <label htmlFor="name-input" className="name-input">
-          Nome:
-          <input
-            type="text"
-            data-testid="input-player-name"
-            name="name"
-            id="name-input"
-            value={ name }
-            onChange={ this.handleChange }
+      <section className="App">
+        <section className="input-login">
+          <img src={ logo } className="App-logo" alt="logo" />
+          <label htmlFor="name-input" className="name-input">
+            Nome:
+            <input
+              type="text"
+              data-testid="input-player-name"
+              name="name"
+              className="inputs"
+              id="name-input"
+              value={ name }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label htmlFor="email-input" className="name-input">
+            Email:
+            <input
+              type="email"
+              className="inputs"
+              data-testid="input-gravatar-email"
+              name="email"
+              id="email-input"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <Buttons
+            disabled={ !email || !name }
+            dataTestid="btn-play"
+            id="button-form"
+            onClick={ () => this.handleClick('/game') }
+            text="Jogar"
+            className="gameNext"
           />
-        </label>
-        <label htmlFor="email-input" className="name-input">
-          Email:
-          <input
-            type="email"
-            data-testid="input-gravatar-email"
-            name="email"
-            id="email-input"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <Buttons
-          disabled={ !email || !name }
-          dataTestid="btn-play"
-          id="button-form"
-          onClick={ () => this.handleClick('/game') }
-          text="Jogar"
-        />
-        <Link to="/settings">
+          {/* <Link to="/settings"> */}
           <Buttons
             dataTestid="btn-settings"
             id="button-config"
             text="Configurar"
           />
-        </Link>
+          {/* </Link> */}
+        </section>
       </section>
     );
   }
