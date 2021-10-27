@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../7FbY.gif';
 import { setfeedback } from '../../Redux/Actions';
 import { requestToken } from '../../services/Api';
@@ -75,13 +75,13 @@ class Login extends Component {
             text="Jogar"
             className="gameNext"
           />
-          {/* <Link to="/settings"> */}
+          <Link to="/settings">
           <Buttons
             dataTestid="btn-settings"
             id="button-config"
             text="Configurar"
           />
-          {/* </Link> */}
+          </Link>
         </section>
       </section>
     );
