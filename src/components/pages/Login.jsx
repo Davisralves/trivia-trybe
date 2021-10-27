@@ -76,11 +76,11 @@ class Login extends Component {
             className="gameNext"
           />
           <Link to="/settings">
-          <Buttons
-            dataTestid="btn-settings"
-            id="button-config"
-            text="Configurar"
-          />
+            <Buttons
+              dataTestid="btn-settings"
+              id="button-config"
+              text="Configurar"
+            />
           </Link>
         </section>
       </section>
