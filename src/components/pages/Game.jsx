@@ -57,7 +57,7 @@ export default class Game extends Component {
 
   handleNextQuestion() {
     const { history } = this.props;
-    const { index, resetTimer } = this.state;
+    const { index } = this.state;
     const maxLimit = 3;
     this.setTimer30seg();
     if (index <= maxLimit) {
@@ -183,6 +183,7 @@ export default class Game extends Component {
 
 Game.propTypes = {
   history: PropTypes.shape({
+    resetTimer: PropTypes.bool.isRequired,
     push: PropTypes.func,
   }).isRequired,
 };
