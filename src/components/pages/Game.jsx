@@ -25,6 +25,7 @@ export default class Game extends Component {
       correctClick: false,
       answer: '',
       clicked: false,
+      resetTimer: false,
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -35,6 +36,7 @@ export default class Game extends Component {
     this.handleNextQuestion = this.handleNextQuestion.bind(this);
     this.nextButton = this.nextButton.bind(this);
     this.setTimer30seg = this.setTimer30seg.bind(this);
+    this.changeResetTimer = this.changeResetTimer.bind(this);
   }
 
   async componentDidMount() {
@@ -55,7 +57,7 @@ export default class Game extends Component {
 
   handleNextQuestion() {
     const { history } = this.props;
-    const { index } = this.state;
+    const { index, resetTimer } = this.state;
     const maxLimit = 3;
     this.setTimer30seg();
     if (index <= maxLimit) {
@@ -63,8 +65,15 @@ export default class Game extends Component {
         index: prevState.index + 1,
         disable: false,
         clicked: false,
+        resetTimer: true,
       }));
     } else { history.push('/feedback'); }
+  }
+
+  changeResetTimer() {
+    this.setState({
+      resetTimer: false,
+    });
   }
 
   nextButton() {
@@ -141,7 +150,7 @@ export default class Game extends Component {
       disable,
       correctClick,
       answer,
-      clicked } = this.state;
+      clicked, resetTimer } = this.state;
     const {
       category,
       type,
@@ -156,6 +165,8 @@ export default class Game extends Component {
           correctClick={ correctClick }
           setClickedFalse={ this.setClickedFalse }
           answer={ answer }
+          resetTimer={ resetTimer }
+          changeResetTimer={ this.changeResetTimer }
         />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>

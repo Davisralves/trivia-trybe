@@ -11,11 +11,22 @@ class Timer extends Component {
       counter: 30,
     };
     this.subtractTimer = this.subtractTimer.bind(this);
+    this.resetTimerFunc = this.resetTimerFunc.bind(this);
   }
 
   async componentDidMount() {
     const seg = 1000;
     setInterval(this.subtractTimer, seg);
+  }
+
+  resetTimerFunc() {
+    const { resetTimer, changeResetTimer } = this.props;
+    console.log(resetTimer);
+    if (resetTimer) {
+      this.setState({
+        counter: 30,
+      });
+    } changeResetTimer();
   }
 
   subtractTimer() {
@@ -51,7 +62,7 @@ class Timer extends Component {
       setClickedFalse,
       dispatchCount,
       answer,
-      player } = this.props;
+      player, resetTimerFunc } = this.props;
     const { counter } = this.state;
     const score = this.points(counter, difficulty);
     if (correctClick) {
@@ -63,6 +74,7 @@ class Timer extends Component {
       }
       setClickedFalse();
     }
+    this.resetTimerFunc();
     return (
       <h3>
         Tempo:
