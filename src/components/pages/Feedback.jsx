@@ -21,7 +21,7 @@ class Feedback extends Component {
         <Header />
         <div>
           <h3 data-testid="feedback-text">
-            { questionsAssert >= score ? goodResult : badResult }
+            { score >= questionsAssert ? goodResult : badResult }
           </h3>
         </div>
         <section>
@@ -30,7 +30,7 @@ class Feedback extends Component {
             🏆
           </h1>
           <h2 data-testid="feedback-total-question">
-            { assertions >= 0 ? 'Não acertou nenhuma pergunta!'
+            { assertions <= 0 ? 'Não acertou nenhuma pergunta!'
               : `Acertou ${assertions} perguntas`}
           </h2>
         </section>
