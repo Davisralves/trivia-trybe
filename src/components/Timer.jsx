@@ -50,17 +50,15 @@ class Timer extends Component {
       correctClick,
       setClickedFalse,
       dispatchCount,
-      answer,
       player } = this.props;
+      console.log(correctClick);
     const { counter } = this.state;
     const score = this.points(counter, difficulty);
     if (correctClick) {
       player.score += score;
       player.assertions += 1;
       saveScore(player);
-      if (answer === 'corre') {
-        dispatchCount({ player });
-      }
+      dispatchCount({ player });
       setClickedFalse();
     }
     return (

@@ -111,10 +111,12 @@ export default class Game extends Component {
   changeBorderColor({ target }) {
     this.setState({
       disable: true,
-      correctClick: true,
       clicked: true,
       answer: target.className,
     });
+    if(target.className === 'corre') {
+      this.setState({correctClick: true})
+    }
   }
 
   sortArray(array) {
@@ -159,7 +161,8 @@ export default class Game extends Component {
         <Header />
         <Timer
           difficulty={ difficulty }
-          correctClick={ correctClick }
+          clicked={ clicked }
+          correctClick={correctClick}
           setClickedFalse={ this.setClickedFalse }
           answer={ answer }
         />
