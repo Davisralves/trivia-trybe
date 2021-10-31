@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { requestTriviaApi } from '../../services/Api';
 import './Game.css';
 import Timer from '../Timer';
+import Header from './Header';
 
 export default class Game extends Component {
   constructor() {
@@ -25,6 +26,7 @@ export default class Game extends Component {
       correctClick: false,
       answer: '',
       clicked: false,
+      loading: true,
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -45,7 +47,7 @@ export default class Game extends Component {
 
   setClickedFalse() { this.setState({ correctClick: false }); }
 
-  setQuestionState(questions) { return this.setState({ questions }); }
+  setQuestionState(questions) { return this.setState({ questions, loading: false }); }
 
   setTimer30seg() {
     const timeOut = 30000;
@@ -64,7 +66,9 @@ export default class Game extends Component {
         disable: false,
         clicked: false,
       }));
-    } else { history.push('/feedback'); }
+    } else {
+      history.push('/feedback');
+    }
   }
 
   nextButton() {
@@ -141,7 +145,7 @@ export default class Game extends Component {
       disable,
       correctClick,
       answer,
-      clicked } = this.state;
+      clicked, loading } = this.state;
     const {
       category,
       type,
@@ -149,8 +153,10 @@ export default class Game extends Component {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
       difficulty } = results[index];
+    if (loading) return <span>Loading</span>;
     return (
       <main>
+        <Header />
         <Timer
           difficulty={ difficulty }
           correctClick={ correctClick }

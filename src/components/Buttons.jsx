@@ -7,6 +7,7 @@ export default class Buttons extends Component {
     return (
       <button
         type="button"
+        className="buttons-login"
         data-testid={ dataTestid }
         id={ id }
         disabled={ disabled }

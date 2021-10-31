@@ -68,6 +68,7 @@ class Timer extends Component {
         Tempo:
         {' '}
         {counter}
+        { console.log(`Time: ${counter}`)}
       </h3>
     );
   }
