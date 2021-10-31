@@ -11,11 +11,22 @@ class Timer extends Component {
       counter: 30,
     };
     this.subtractTimer = this.subtractTimer.bind(this);
+    this.resetTimerFunc = this.resetTimerFunc.bind(this);
   }
 
   async componentDidMount() {
     const seg = 1000;
     setInterval(this.subtractTimer, seg);
+  }
+
+  resetTimerFunc() {
+    const { resetTimer, changeResetTimer } = this.props;
+    console.log(resetTimer);
+    if (resetTimer) {
+      this.setState({
+        counter: 30,
+      });
+    } changeResetTimer();
   }
 
   subtractTimer() {
@@ -51,7 +62,7 @@ class Timer extends Component {
       setClickedFalse,
       dispatchCount,
       answer,
-      player } = this.props;
+      player, resetTimerFunc } = this.props;
     const { counter } = this.state;
     const score = this.points(counter, difficulty);
     if (correctClick) {
@@ -63,6 +74,7 @@ class Timer extends Component {
       }
       setClickedFalse();
     }
+    resetTimerFunc();
     return (
       <h3>
         Tempo:
@@ -77,6 +89,7 @@ class Timer extends Component {
 Timer.propTypes = {
   answer: PropTypes.string.isRequired,
   correctClick: PropTypes.bool.isRequired,
+  resetTimer: PropTypes.bool.isRequired,
   difficulty: PropTypes.number.isRequired,
   dispatchCount: PropTypes.func.isRequired,
   player: PropTypes.shape({
@@ -84,6 +97,8 @@ Timer.propTypes = {
     score: PropTypes.number,
   }).isRequired,
   setClickedFalse: PropTypes.func.isRequired,
+  resetTimerFunc: PropTypes.func.isRequired,
+  changeResetTimer: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

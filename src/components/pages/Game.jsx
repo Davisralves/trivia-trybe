@@ -26,6 +26,7 @@ export default class Game extends Component {
       correctClick: false,
       answer: '',
       clicked: false,
+      resetTimer: false,
       loading: true,
     };
     this.setQuestionState = this.setQuestionState.bind(this);
@@ -37,6 +38,7 @@ export default class Game extends Component {
     this.handleNextQuestion = this.handleNextQuestion.bind(this);
     this.nextButton = this.nextButton.bind(this);
     this.setTimer30seg = this.setTimer30seg.bind(this);
+    this.changeResetTimer = this.changeResetTimer.bind(this);
   }
 
   async componentDidMount() {
@@ -65,10 +67,17 @@ export default class Game extends Component {
         index: prevState.index + 1,
         disable: false,
         clicked: false,
+        resetTimer: true,
       }));
     } else {
       history.push('/feedback');
     }
+  }
+
+  changeResetTimer() {
+    this.setState({
+      resetTimer: false,
+    });
   }
 
   nextButton() {
@@ -145,7 +154,9 @@ export default class Game extends Component {
       disable,
       correctClick,
       answer,
-      clicked, loading } = this.state;
+      clicked,
+      resetTimer,
+      loading } = this.state;
     const {
       category,
       type,
@@ -162,6 +173,8 @@ export default class Game extends Component {
           correctClick={ correctClick }
           setClickedFalse={ this.setClickedFalse }
           answer={ answer }
+          resetTimer={ resetTimer }
+          changeResetTimer={ this.changeResetTimer }
         />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>
@@ -178,6 +191,7 @@ export default class Game extends Component {
 
 Game.propTypes = {
   history: PropTypes.shape({
+    resetTimer: PropTypes.bool.isRequired,
     push: PropTypes.func,
   }).isRequired,
 };
