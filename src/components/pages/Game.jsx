@@ -146,7 +146,6 @@ export default class Game extends Component {
       index,
       disable,
       correctClick,
-      answer,
       clicked, loading } = this.state;
     const {
       category,
@@ -164,7 +163,6 @@ export default class Game extends Component {
           clicked={ clicked }
           correctClick={correctClick}
           setClickedFalse={ this.setClickedFalse }
-          answer={ answer }
         />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>
