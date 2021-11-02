@@ -26,7 +26,9 @@ export default class Game extends Component {
       correctClick: false,
       answer: '',
       clicked: false,
+      resetTimer: false,
       loading: true,
+      timerId: '',
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -37,6 +39,7 @@ export default class Game extends Component {
     this.handleNextQuestion = this.handleNextQuestion.bind(this);
     this.nextButton = this.nextButton.bind(this);
     this.setTimer30seg = this.setTimer30seg.bind(this);
+    this.changeResetTimer = this.changeResetTimer.bind(this);
   }
 
   async componentDidMount() {
@@ -51,24 +54,32 @@ export default class Game extends Component {
 
   setTimer30seg() {
     const timeOut = 30000;
-    clearTimeout();
-    setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
+    const timerId = setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
+    this.setState({timerId});
   }
 
   handleNextQuestion() {
     const { history } = this.props;
-    const { index } = this.state;
+    const { index, timerId } = this.state;
     const maxLimit = 3;
+    clearTimeout(timerId);
     this.setTimer30seg();
     if (index <= maxLimit) {
       this.setState((prevState) => ({
         index: prevState.index + 1,
         disable: false,
         clicked: false,
+        resetTimer: true,
       }));
     } else {
       history.push('/feedback');
     }
+  }
+
+  changeResetTimer() {
+    this.setState({
+      resetTimer: false,
+    });
   }
 
   nextButton() {
@@ -146,7 +157,9 @@ export default class Game extends Component {
       index,
       disable,
       correctClick,
-      clicked, loading } = this.state;
+      clicked,
+      resetTimer,
+      loading } = this.state;
     const {
       category,
       type,
@@ -163,6 +176,9 @@ export default class Game extends Component {
           clicked={ clicked }
           correctClick={correctClick}
           setClickedFalse={ this.setClickedFalse }
+          resetTimer={ resetTimer }
+          changeResetTimer={ this.changeResetTimer }
+          clicked={clicked}
         />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>
@@ -179,6 +195,7 @@ export default class Game extends Component {
 
 Game.propTypes = {
   history: PropTypes.shape({
+    resetTimer: PropTypes.bool.isRequired,
     push: PropTypes.func,
   }).isRequired,
 };
