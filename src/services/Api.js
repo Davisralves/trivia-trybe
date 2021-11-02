@@ -26,7 +26,7 @@ export const requestTriviaApi = async (questionUrl) => { // questionUrl opcional
       token = await requestToken();
       requestQuestionAndSave(token);
     }
-    return  request.questionObject;
+    return request.questionObject;
   }
 };
 

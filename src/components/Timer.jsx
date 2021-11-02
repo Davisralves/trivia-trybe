@@ -71,9 +71,9 @@ class Timer extends Component {
       dispatchCount({ player });
       setClickedFalse();
     }
-    if(resetTimer) {
+    if (resetTimer) {
       this.resetTimerFunc();
-    };
+    }
     return (
       <h3>
         Tempo:
@@ -85,7 +85,6 @@ class Timer extends Component {
 }
 
 Timer.propTypes = {
-  answer: PropTypes.string.isRequired,
   correctClick: PropTypes.bool.isRequired,
   resetTimer: PropTypes.bool.isRequired,
   difficulty: PropTypes.number.isRequired,
@@ -95,7 +94,6 @@ Timer.propTypes = {
     score: PropTypes.number,
   }).isRequired,
   setClickedFalse: PropTypes.func.isRequired,
-  resetTimerFunc: PropTypes.func.isRequired,
   changeResetTimer: PropTypes.func.isRequired,
 };
 

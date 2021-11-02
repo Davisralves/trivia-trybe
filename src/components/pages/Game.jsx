@@ -24,7 +24,6 @@ export default class Game extends Component {
       },
       index: 0,
       correctClick: false,
-      answer: '',
       clicked: false,
       resetTimer: false,
       loading: true,
@@ -54,8 +53,10 @@ export default class Game extends Component {
 
   setTimer30seg() {
     const timeOut = 30000;
-    const timerId = setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
-    this.setState({timerId});
+    const timerId = setTimeout(
+      () => this.setState({ disable: true, clicked: true }), timeOut,
+    );
+    this.setState({ timerId });
   }
 
   handleNextQuestion() {
@@ -119,14 +120,13 @@ export default class Game extends Component {
     return sortArray(arrayWithDataTest);
   }
 
-  changeBorderColor({ target }) {
+  changeBorderColor({ target: className }) {
     this.setState({
       disable: true,
       clicked: true,
-      answer: target.className,
     });
-    if(target.className === 'corre') {
-      this.setState({correctClick: true})
+    if (className === 'corre') {
+      this.setState({ correctClick: true });
     }
   }
 
@@ -174,11 +174,10 @@ export default class Game extends Component {
         <Timer
           difficulty={ difficulty }
           clicked={ clicked }
-          correctClick={correctClick}
+          correctClick={ correctClick }
           setClickedFalse={ this.setClickedFalse }
           resetTimer={ resetTimer }
           changeResetTimer={ this.changeResetTimer }
-          clicked={clicked}
         />
         <div id="buttonId">
           <h6 data-testid="question-category">{category}</h6>
