@@ -21,7 +21,6 @@ class Timer extends Component {
 
   resetTimerFunc() {
     const { resetTimer, changeResetTimer } = this.props;
-    console.log(resetTimer);
     if (resetTimer) {
       this.setState({
         counter: 30,
