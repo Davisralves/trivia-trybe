@@ -13,8 +13,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
+      player: { name: '', email: '' },
     };
 
     this.handleChange = this.handleChange.bind(this);

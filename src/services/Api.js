@@ -10,32 +10,30 @@ export const requestQuestion = async (token, questionUrl = 'https://opentdb.com/
   return data.json();
 };
 
-export const saveResponse = (questionObject) => (
-  localStorage.setItem('Questions', JSON.stringify(questionObject))
-);
-
 export const requestQuestionAndSave = async (token, questionUrl) => {
   const questionObject = await requestQuestion(token, questionUrl);
   const { response_code: responseCode } = questionObject;
   if (responseCode === 0) {
-    saveResponse(questionObject);
-    return { boolean: true, questionObject };
-  } return { boolean: false, questionObject };
+    return { tokenIsValid: true, questionObject };
+  } return { tokenIsValid: false };
 };
 
 export const requestTriviaApi = async (questionUrl) => { // questionUrl opcional
   let token = localStorage.getItem('token');
   if (token) {
-    const tokeIsValid = await requestQuestionAndSave(token, questionUrl);
-    if (!(await tokeIsValid).boolean) {
+    const request = await requestQuestionAndSave(token, questionUrl);
+    if (!request.tokenIsValid) {
       token = await requestToken();
       requestQuestionAndSave(token);
     }
-    return (await tokeIsValid).questionObject;
+    return request.questionObject;
   }
 };
 
 export const saveScore = (score) => {
-  const player = JSON.stringify(score);
+  // console.log(score);
+  const teste = { player: score };
+  console.log(teste);
+  const player = JSON.stringify(teste);
   localStorage.setItem('state', player);
 };

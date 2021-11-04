@@ -21,7 +21,6 @@ class Timer extends Component {
 
   resetTimerFunc() {
     const { resetTimer, changeResetTimer } = this.props;
-    console.log(resetTimer);
     if (resetTimer) {
       this.setState({
         counter: 30,
@@ -52,7 +51,7 @@ class Timer extends Component {
   points(timer, dificuldade) {
     const base = 10;
     const dificult = this.calculateDificult(dificuldade);
-    return base + (timer * dificult);
+    return base + timer * dificult;
   }
 
   render() {
@@ -61,33 +60,32 @@ class Timer extends Component {
       correctClick,
       setClickedFalse,
       dispatchCount,
-      answer,
-      player, resetTimerFunc } = this.props;
+      resetTimer,
+      player } = this.props;
     const { counter } = this.state;
-    const score = this.points(counter, difficulty);
+    console.log(`correctClick: ${correctClick}`);
     if (correctClick) {
+      const score = this.points(counter, difficulty);
       player.score += score;
       player.assertions += 1;
       saveScore(player);
-      if (answer === 'corre') {
-        dispatchCount({ player });
-      }
+      dispatchCount({ player });
       setClickedFalse();
     }
-    resetTimerFunc();
+    if (resetTimer) {
+      this.resetTimerFunc();
+    }
     return (
       <h3>
         Tempo:
         {' '}
         {counter}
-        { console.log(`Time: ${counter}`)}
       </h3>
     );
   }
 }
 
 Timer.propTypes = {
-  answer: PropTypes.string.isRequired,
   correctClick: PropTypes.bool.isRequired,
   resetTimer: PropTypes.bool.isRequired,
   difficulty: PropTypes.number.isRequired,
@@ -97,7 +95,6 @@ Timer.propTypes = {
     score: PropTypes.number,
   }).isRequired,
   setClickedFalse: PropTypes.func.isRequired,
-  resetTimerFunc: PropTypes.func.isRequired,
   changeResetTimer: PropTypes.func.isRequired,
 };
 

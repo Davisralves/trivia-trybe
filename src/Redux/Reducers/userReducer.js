@@ -48,9 +48,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       player: {
-        ...action.payload.player,
-        score: action.payload.player.score,
+        name: action.payload.player.name,
         assertions: action.payload.player.assertions,
+        score: action.payload.player.score,
+        gravatarEmail: action.payload.player.gravatarEmail,
       },
     };
   default:
