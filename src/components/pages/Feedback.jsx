@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 
 class Feedback extends Component {
@@ -15,13 +16,13 @@ class Feedback extends Component {
 
   render() {
     const { goodResult, badResult, questionsAssert } = this.state;
-    const { score, assertions } = this.props;
+    const { score, assertions, history } = this.props;
     return (
       <section>
         <Header />
         <div>
           <h3 data-testid="feedback-text">
-            { score >= questionsAssert ? goodResult : badResult }
+            { assertions >= questionsAssert ? goodResult : badResult }
           </h3>
         </div>
         <section>
@@ -34,6 +35,13 @@ class Feedback extends Component {
               : `Acertou ${assertions} perguntas`}
           </h2>
         </section>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => history.push('/') }
+        >
+          Jogar novamente
+        </button>
       </section>
     );
   }
