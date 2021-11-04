@@ -63,6 +63,7 @@ class Timer extends Component {
       resetTimer,
       player } = this.props;
     const { counter } = this.state;
+    console.log(`correctClick: ${correctClick}`);
     if (correctClick) {
       const score = this.points(counter, difficulty);
       player.score += score;

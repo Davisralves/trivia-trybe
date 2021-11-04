@@ -120,11 +120,12 @@ export default class Game extends Component {
     return sortArray(arrayWithDataTest);
   }
 
-  changeBorderColor({ target: className }) {
+  changeBorderColor({ target: { className } }) {
     this.setState({
       disable: true,
       clicked: true,
     });
+    console.log(className);
     if (className === 'corre') {
       this.setState({ correctClick: true });
     }
