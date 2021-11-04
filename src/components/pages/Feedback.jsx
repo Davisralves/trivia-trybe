@@ -15,7 +15,7 @@ class Feedback extends Component {
 
   render() {
     const { goodResult, badResult, questionsAssert } = this.state;
-    const { score, assertions } = this.props;
+    const { score, assertions, history } = this.props;
     return (
       <section>
         <Header />
@@ -34,6 +34,20 @@ class Feedback extends Component {
               : assertions }
           </h2>
         </section>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => history.push('/') }
+        >
+          Jogar novamente
+        </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => history.push('/ranking') }
+        >
+          Ranking
+        </button>
       </section>
     );
   }
