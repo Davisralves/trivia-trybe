@@ -24,10 +24,10 @@ export default class Game extends Component {
       },
       index: 0,
       correctClick: false,
-      answer: '',
       clicked: false,
       resetTimer: false,
       loading: true,
+      timerId: '',
     };
     this.setQuestionState = this.setQuestionState.bind(this);
     this.sortArray = this.sortArray.bind(this);
@@ -53,14 +53,17 @@ export default class Game extends Component {
 
   setTimer30seg() {
     const timeOut = 30000;
-    clearTimeout();
-    setTimeout(() => this.setState({ disable: true, clicked: true }), timeOut);
+    const timerId = setTimeout(
+      () => this.setState({ disable: true, clicked: true }), timeOut,
+    );
+    this.setState({ timerId });
   }
 
   handleNextQuestion() {
     const { history } = this.props;
-    const { index } = this.state;
+    const { index, timerId } = this.state;
     const maxLimit = 3;
+    clearTimeout(timerId);
     this.setTimer30seg();
     if (index <= maxLimit) {
       this.setState((prevState) => ({
@@ -117,13 +120,15 @@ export default class Game extends Component {
     return sortArray(arrayWithDataTest);
   }
 
-  changeBorderColor({ target }) {
+  changeBorderColor({ target: { className } }) {
     this.setState({
       disable: true,
-      correctClick: true,
       clicked: true,
-      answer: target.className,
     });
+    console.log(className);
+    if (className === 'corre') {
+      this.setState({ correctClick: true });
+    }
   }
 
   sortArray(array) {
@@ -153,7 +158,6 @@ export default class Game extends Component {
       index,
       disable,
       correctClick,
-      answer,
       clicked,
       resetTimer,
       loading } = this.state;
@@ -170,9 +174,9 @@ export default class Game extends Component {
         <Header />
         <Timer
           difficulty={ difficulty }
+          clicked={ clicked }
           correctClick={ correctClick }
           setClickedFalse={ this.setClickedFalse }
-          answer={ answer }
           resetTimer={ resetTimer }
           changeResetTimer={ this.changeResetTimer }
         />

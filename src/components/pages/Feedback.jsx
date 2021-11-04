@@ -31,8 +31,8 @@ class Feedback extends Component {
             🏆
           </h1>
           <h2 data-testid="feedback-total-question">
-            { assertions <= 0 ? 'Não acertou nenhuma pergunta!'
-              : `Acertou ${assertions} perguntas`}
+            { assertions <= 0 ? assertions
+              : assertions }
           </h2>
         </section>
         <button
