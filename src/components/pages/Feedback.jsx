@@ -30,8 +30,7 @@ class Feedback extends Component {
             🏆
           </h1>
           <h2 data-testid="feedback-total-question">
-            { assertions <= 0 ? assertions
-              : assertions }
+            { `acertou ${assertions}` }
           </h2>
         </section>
         <button

@@ -1,201 +1,171 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+/* eslint-disable camelcase */
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { requestTriviaApi } from '../../services/Api';
 import './Game.css';
-import Timer from '../Timer';
 import Header from './Header';
+import Timer from '../Timer';
 
-export default class Game extends Component {
-  constructor() {
-    super();
-    this.state = {
-      disable: false,
-      questions: {
-        results: [
-          {
-            category: 'question-category',
-            type: '',
-            difficulty: '',
-            question: 'question-text',
-            correct_answer: '',
-            incorrect_answers: [],
-          },
-        ],
-      },
-      index: 0,
-      correctClick: false,
-      clicked: false,
-      resetTimer: false,
-      loading: true,
-      timerId: '',
-    };
-    this.setQuestionState = this.setQuestionState.bind(this);
-    this.sortArray = this.sortArray.bind(this);
-    this.printQuestions = this.printQuestions.bind(this);
-    this.renderButton = this.renderButton.bind(this);
-    this.changeBorderColor = this.changeBorderColor.bind(this);
-    this.setClickedFalse = this.setClickedFalse.bind(this);
-    this.handleNextQuestion = this.handleNextQuestion.bind(this);
-    this.nextButton = this.nextButton.bind(this);
-    this.setTimer30seg = this.setTimer30seg.bind(this);
-    this.changeResetTimer = this.changeResetTimer.bind(this);
-  }
+const innitialState = [
+  {
+    category: 'question-category',
+    type: '',
+    difficulty: '',
+    question: 'question-text',
+    correct_answer: '',
+    sortedAnswers: ['answer1', 'answer2'],
+  },
+];
 
-  async componentDidMount() {
-    const questions = await requestTriviaApi();
-    this.setQuestionState(questions);
-    this.setTimer30seg();
-  }
+// eslint-disable-next-line max-lines-per-function
+export default function Game() {
+  const [apiResponse, setApiResponse] = useState(innitialState);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [disableButton, setdisbleButtons] = useState(false);
+  const [correctClick, setCorrectClick] = useState(false);
+  const [timerId, setTimerID] = useState();
+  const [resetTimer, setResetTimer] = useState(false);
+  const [pauseTimer, setPauseTimer] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  setClickedFalse() { this.setState({ correctClick: false }); }
+  const maxQuestionsNumber = 4;
+  const history = useHistory();
 
-  setQuestionState(questions) { return this.setState({ questions, loading: false }); }
-
-  setTimer30seg() {
-    const timeOut = 30000;
-    const timerId = setTimeout(
-      () => this.setState({ disable: true, clicked: true }), timeOut,
-    );
-    this.setState({ timerId });
-  }
-
-  handleNextQuestion() {
-    const { history } = this.props;
-    const { index, timerId } = this.state;
-    const maxLimit = 3;
+  const setTimer30seg = () => {
     clearTimeout(timerId);
-    this.setTimer30seg();
-    if (index <= maxLimit) {
-      this.setState((prevState) => ({
-        index: prevState.index + 1,
-        disable: false,
-        clicked: false,
-        resetTimer: true,
-      }));
-    } else {
-      history.push('/feedback');
-    }
-  }
-
-  changeResetTimer() {
-    this.setState({
-      resetTimer: false,
-    });
-  }
-
-  nextButton() {
-    return (
-      <button
-        type="button"
-        data-testid="btn-next"
-        onClick={ this.handleNextQuestion }
-      >
-        Próxima
-      </button>
+    const timeOut = 30000;
+    const id = setTimeout(
+      () => setdisbleButtons(true), timeOut,
     );
-  }
+    setTimerID(id);
+  };
 
-  printQuestions(correctAnswer, incorrectAnswers, type, disable) {
-    const { renderButton, sortArray } = this;
-    if (type === 'multiple') {
-      const array = [...incorrectAnswers, correctAnswer];
-      const WrongAnswers = 3;
-
-      const arrayWithDataTest = array.map((anwser, index) => {
-        const dataTest = index < WrongAnswers
-          ? `wrong-answer-${index}` : 'correct-answer';
-        return (renderButton(dataTest, index, anwser, disable));
-      });
-
-      return sortArray(arrayWithDataTest);
-    }
-
-    const array = [incorrectAnswers, correctAnswer];
-    const arrayWithDataTest = array.map((anwser, index) => {
-      if (index === 0) {
-        return (renderButton(`wrong-answer-${index}`, index, anwser, disable));
-      }
-      return (renderButton('correct-answer', index, anwser, disable));
-    });
-    return sortArray(arrayWithDataTest);
-  }
-
-  changeBorderColor({ target: { className } }) {
-    this.setState({
-      disable: true,
-      clicked: true,
-    });
-    console.log(className);
-    if (className === 'corre') {
-      this.setState({ correctClick: true });
-    }
-  }
-
-  sortArray(array) {
+  const sortArray = ({
+    correct_answer,
+    incorrect_answers }) => {
     const fiftyPercent = 0.5;
+    const array = [correct_answer, ...incorrect_answers];
     return array.sort(() => Math.random() - fiftyPercent);
-  }
+  };
 
-  renderButton(dataTest, index, anwser, disable) {
-    const sliceNumber1 = 0;
-    const sliceNumbe2 = 5;
-    return (
+  const sortAnswers = (results) => (
+    results.map((object) => (
+      { ...object, sortedAnswers: sortArray(object) }))
+  );
+
+  const fetchApi = async () => {
+    setLoading(true);
+    const { results } = await requestTriviaApi();
+    setApiResponse(sortAnswers(results));
+    setLoading(false);
+    setTimer30seg();
+  };
+
+  const decodeUtf8 = (string) => {
+    // função inspirada em por função de Lucas Rodrigues Turma 08
+    const stringUTF = decodeURI(string);
+    const convertDoubleQuotes = stringUTF.replace(/&quot;/g, '"');
+    const convertQuotes = convertDoubleQuotes.replace(/&#039;/g, '\'');
+    const convertAccent = convertQuotes.replace(/&eacute/g, 'é');
+    return convertAccent;
+  };
+
+  const handleAnswerClick = (className) => {
+    setdisbleButtons(true);
+    setPauseTimer(true);
+    if (className === 'correct') {
+      setCorrectClick(true);
+    }
+  };
+
+  const renderButton = (className, answer, key) => (
+    <button
+      type="button"
+      className={ className }
+      key={ key }
+      disabled={ disableButton }
+      onClick={ () => handleAnswerClick(className) }
+    >
+      {decodeUtf8(answer)}
+    </button>);
+
+  const printAnwsers = (sortedAnswers, correct_answer) => (
+    sortedAnswers.map((answer, index) => {
+      if (answer === correct_answer) {
+        return renderButton('correct', answer, index);
+      } return renderButton('wrong', answer, index);
+    })
+  );
+
+  const handleNextQuestion = () => {
+    if (questionIndex < maxQuestionsNumber) {
+      setQuestionIndex(questionIndex + 1);
+      setdisbleButtons(false);
+    }
+    setResetTimer(true);
+    setTimer30seg();
+    setPauseTimer(false);
+  };
+
+  const nextOrGoToFeedbackButton = () => {
+    const nextButton = (
       <button
         type="button"
-        data-testid={ dataTest }
-        key={ index }
-        className={ dataTest.slice(sliceNumber1, sliceNumbe2) }
-        disabled={ disable }
-        onClick={ this.changeBorderColor }
+        onClick={ handleNextQuestion }
       >
-        {anwser}
+        Next
       </button>);
-  }
+    const goToFeedBackButton = (
+      <button
+        type="button"
+        onClick={ () => history.push('/feedback') }
+      >
+        Go to Feedback
+      </button>);
+    const none = <span />;
+    if (disableButton && questionIndex < maxQuestionsNumber) {
+      return nextButton;
+    }
+    if (disableButton && questionIndex === maxQuestionsNumber) {
+      return goToFeedBackButton;
+    } return none;
+  };
 
-  render() {
-    const {
-      questions: { results },
-      index,
-      disable,
-      correctClick,
-      clicked,
-      resetTimer,
-      loading } = this.state;
-    const {
-      category,
-      type,
-      question,
-      correct_answer: correctAnswer,
-      incorrect_answers: incorrectAnswers,
-      difficulty } = results[index];
-    if (loading) return <span>Loading</span>;
-    return (
-      <main>
-        <Header />
-        <Timer
-          difficulty={ difficulty }
-          clicked={ clicked }
-          correctClick={ correctClick }
-          setClickedFalse={ this.setClickedFalse }
-          resetTimer={ resetTimer }
-          changeResetTimer={ this.changeResetTimer }
-        />
-        <div id="buttonId">
-          <h6 data-testid="question-category">{category}</h6>
-          <p data-testid="question-text">{question}</p>
-        </div>
-        <div>
-          {this.printQuestions(correctAnswer, incorrectAnswers, type, disable)}
-          { clicked ? this.nextButton() : <span /> }
-        </div>
-      </main>
-    );
-  }
+  useEffect(() => { fetchApi(); }, []);
+  useEffect(() => (setResetTimer(false)), [resetTimer]);
+  const {
+    category,
+    question,
+    correct_answer,
+    sortedAnswers,
+    difficulty,
+  } = apiResponse[questionIndex];
+  return (
+    <main>
+      <Header />
+      {loading ? <h1>Loading...</h1>
+        : (
+          <section>
+            <Timer
+              difficulty={ parseInt(difficulty, 10) }
+              clicked={ disableButton }
+              correctClick={ correctClick }
+              setCorrectClick={ setCorrectClick }
+              resetTimer={ resetTimer }
+              setResetTimer={ setResetTimer }
+              pauseTimer={ pauseTimer }
+              setPauseTimer={ setPauseTimer }
+            />
+            <div id="buttonId">
+              <h6 data-testid="question-category">{category}</h6>
+              <p data-testid="question-text">{decodeUtf8(question)}</p>
+            </div>
+            <div>
+              { printAnwsers(sortedAnswers, correct_answer) }
+            </div>
+            { nextOrGoToFeedbackButton() }
+          </section>
+        )}
+    </main>
+  );
 }
-
-Game.propTypes = {
-  history: PropTypes.shape({
-    resetTimer: PropTypes.bool.isRequired,
-    push: PropTypes.func,
-  }).isRequired,
-};

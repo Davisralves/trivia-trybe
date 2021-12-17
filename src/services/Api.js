@@ -31,9 +31,7 @@ export const requestTriviaApi = async (questionUrl) => { // questionUrl opcional
 };
 
 export const saveScore = (score) => {
-  // console.log(score);
-  const teste = { player: score };
-  console.log(teste);
-  const player = JSON.stringify(teste);
+  const PlayerScore = { player: score };
+  const player = JSON.stringify(PlayerScore);
   localStorage.setItem('state', player);
 };

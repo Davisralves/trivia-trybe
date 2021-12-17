@@ -5,10 +5,11 @@ import { setScore } from '../Redux/Actions';
 import { saveScore } from '../services/Api';
 
 class Timer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       counter: 30,
+      pause: props.pauseTimer,
     };
     this.subtractTimer = this.subtractTimer.bind(this);
     this.resetTimerFunc = this.resetTimerFunc.bind(this);
@@ -20,17 +21,24 @@ class Timer extends Component {
   }
 
   resetTimerFunc() {
-    const { resetTimer, changeResetTimer } = this.props;
+    const { resetTimer, pauseTimer } = this.props;
     if (resetTimer) {
       this.setState({
         counter: 30,
+        pause: pauseTimer,
       });
-    } changeResetTimer();
+    }
   }
 
   subtractTimer() {
-    this.setState(({ counter }) => (
-      counter > 0 ? ({ counter: counter - 1 }) : ({ counter: 0 })));
+    const { pauseTimer } = this.props;
+    this.setState(({ counter, pause }) => {
+      if (!pause) {
+        return counter > 0
+          ? ({ counter: counter - 1, pause: pauseTimer })
+          : ({ counter: 0 });
+      } return ({ counter, pause });
+    });
   }
 
   calculateDificult(dificuldade) {
@@ -44,7 +52,7 @@ class Timer extends Component {
       return medium;
     case 'easy':
       return easy;
-    default: return '';
+    default: return easy;
     }
   }
 
@@ -58,19 +66,18 @@ class Timer extends Component {
     const {
       difficulty,
       correctClick,
-      setClickedFalse,
+      setCorrectClick,
       dispatchCount,
       resetTimer,
       player } = this.props;
     const { counter } = this.state;
-    console.log(`correctClick: ${correctClick}`);
     if (correctClick) {
       const score = this.points(counter, difficulty);
       player.score += score;
       player.assertions += 1;
       saveScore(player);
       dispatchCount({ player });
-      setClickedFalse();
+      setCorrectClick(false);
     }
     if (resetTimer) {
       this.resetTimerFunc();
@@ -94,8 +101,8 @@ Timer.propTypes = {
     assertions: PropTypes.number,
     score: PropTypes.number,
   }).isRequired,
-  setClickedFalse: PropTypes.func.isRequired,
-  changeResetTimer: PropTypes.func.isRequired,
+  setCorrectClick: PropTypes.func.isRequired,
+  pauseTimer: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
