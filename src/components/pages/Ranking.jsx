@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getPlayersRank, getGravatar } from '../../services/Api';
+import './Ranking.css';
 
 const playerRank = (name, score, email) => (
   <div>
     <h5>{name}</h5>
     <img
+      className="gravatarImg"
       src={ `https://www.gravatar.com/avatar/${getGravatar(email)}` }
       alt="player"
     />
