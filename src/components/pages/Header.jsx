@@ -37,7 +37,6 @@ class Header extends Component {
           </p>
           <p data-testid="header-score">
             { score }
-            { console.log(`score:${score}`)}
           </p>
         </div>
       </header>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './Header';
+import { savePlayerRank } from '../../services/Api';
 
 class Feedback extends Component {
   constructor() {
@@ -11,11 +12,17 @@ class Feedback extends Component {
       badResult: 'Podia ser melhor...',
       questionsAssert: 3,
     };
+    this.handleRankingClick = this.handleRankingClick.bind(this);
+  }
+
+  handleRankingClick(name, score, email, history) {
+    savePlayerRank({ name, score, email });
+    history.push('/ranking');
   }
 
   render() {
     const { goodResult, badResult, questionsAssert } = this.state;
-    const { score, assertions, history } = this.props;
+    const { name, email, score, assertions, history } = this.props;
     return (
       <section>
         <Header />
@@ -43,7 +50,7 @@ class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
+          onClick={ () => this.handleRankingClick(name, score, email, history) }
         >
           Ranking
         </button>
@@ -58,6 +65,8 @@ Feedback.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
+  name: state.userReducer.player.name,
+  email: state.userReducer.player.gravatarEmail,
   score: state.userReducer.player.score,
   assertions: state.userReducer.player.assertions,
 });

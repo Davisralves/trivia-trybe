@@ -1,3 +1,5 @@
+import md5 from 'crypto-js/md5';
+
 export const requestToken = async () => {
   const sessionTokenUrl = 'https://opentdb.com/api_token.php?command=request';
   const data = await fetch(sessionTokenUrl);
@@ -34,4 +36,17 @@ export const saveScore = (score) => {
   const PlayerScore = { player: score };
   const player = JSON.stringify(PlayerScore);
   localStorage.setItem('state', player);
+};
+
+export const getPlayersRank = () => JSON.parse(localStorage.getItem('ranks'));
+
+export const savePlayerRank = (newRank) => {
+  const actualRanks = getPlayersRank() || [];
+  console.log([...actualRanks, newRank].sort());
+  localStorage.setItem('ranks', JSON.stringify([...actualRanks, newRank].sort()));
+};
+
+export const getGravatar = (email) => {
+  const gravatar = md5(email).toString();
+  return gravatar;
 };
