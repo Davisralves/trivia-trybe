@@ -1,5 +1,5 @@
 {
-  "homepage": "https:\/\/username.github.io/app-toot-name",
+  "homepage": "https://username.github.io/app-toot-name",
   "name": "trivia-test",
   "version": "0.1.0",
   "private": true,
@@ -79,6 +79,5 @@
       "text",
       "clover"
     ]
-    
   }
 }
