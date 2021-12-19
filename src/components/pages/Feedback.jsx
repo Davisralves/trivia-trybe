@@ -24,7 +24,7 @@ class Feedback extends Component {
     const { goodResult, badResult, questionsAssert } = this.state;
     const { name, email, score, assertions, history } = this.props;
     return (
-      <section>
+      <section className="App paper container-lg">
         <Header />
         <div>
           <h3 data-testid="feedback-text">

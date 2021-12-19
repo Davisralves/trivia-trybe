@@ -141,7 +141,7 @@ export default function Game() {
     difficulty,
   } = apiResponse[questionIndex];
   return (
-    <main>
+    <main className="App paper container-lg">
       <Header />
       {loading ? <h1>Loading...</h1>
         : (

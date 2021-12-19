@@ -16,19 +16,21 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
+  margin-top: auto;
 }
 
 .name-input {
-  align-items: center;
-  display: flex;
-  margin-left: 150px;
-  margin-top: 6px;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .inputs {
-  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
+
 
 .buttons-login {
   margin: 6px;

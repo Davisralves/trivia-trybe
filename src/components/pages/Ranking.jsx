@@ -20,7 +20,7 @@ class Ranking extends React.Component {
   render() {
     const { history } = this.props;
     return (
-      <main>
+      <main className="App paper container-lg">
         <h1 data-testid="ranking-title"> Ranking </h1>
         {getPlayersRank()
           .map(({ name, score, picture }) => playerRank(name, score, picture))}

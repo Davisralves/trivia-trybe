@@ -43,11 +43,11 @@ class Login extends Component {
         <section className="input-login">
           <img src={ logo } className="App-logo" alt="logo" />
           <label htmlFor="name-input" className="name-input">
-            Nome:
             <input
               type="text"
               data-testid="input-player-name"
               name="name"
+              placeholder="Nome"
               className="inputs"
               id="name-input"
               value={ name }
@@ -55,13 +55,13 @@ class Login extends Component {
             />
           </label>
           <label htmlFor="email-input" className="name-input">
-            Email:
             <input
               type="email"
               className="inputs"
               data-testid="input-gravatar-email"
               name="email"
               id="email-input"
+              placeholder="Email"
               value={ email }
               onChange={ this.handleChange }
             />
