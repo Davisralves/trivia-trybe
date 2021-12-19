@@ -42,8 +42,8 @@ export const getPlayersRank = () => JSON.parse(localStorage.getItem('ranks'));
 
 export const savePlayerRank = (newRank) => {
   const actualRanks = getPlayersRank() || [];
-  console.log([...actualRanks, newRank].sort());
-  localStorage.setItem('ranks', JSON.stringify([...actualRanks, newRank].sort()));
+  localStorage.setItem('ranks', JSON.stringify([...actualRanks, newRank]
+    .sort(({ score: scoreA }, { score: scoreB }) => scoreB - scoreA)));
 };
 
 export const getGravatar = (email) => {

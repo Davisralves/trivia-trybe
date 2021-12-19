@@ -18,7 +18,6 @@ const playerRank = (name, score, email) => (
 
 class Ranking extends React.Component {
   render() {
-    console.log(getPlayersRank());
     const { history } = this.props;
     return (
       <main>
