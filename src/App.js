@@ -10,6 +10,7 @@ import Ranking from './components/pages/Ranking';
 class App extends Component {
   render() {
     return (
+      <section>
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/settings" component={ Settings } />
@@ -17,6 +18,7 @@ class App extends Component {
         <Route path="/feedback" component={ Feedback } />
         <Route path="/ranking" component={ Ranking } />
       </Switch>
+      </section>
     );
   }
 }
