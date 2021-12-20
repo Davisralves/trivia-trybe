@@ -5,7 +5,15 @@
 Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davisralves), [Nasser Almeida](https://github.com/nasseralm), [Matheus Rodrigues](https://github.com/matheus-luz), [Breno Matias](https://github.com/brenoMatias) e [Ana Alice Honório](https://github.com/Ana-Alice-Honorio) com React e Redux.
 
 ## Link
- [Link_para_jogo](https://davisralves.github.io/trivia-trybe/)
+ [Clique Aqui](https://davisralves.github.io/trivia-trybe/)
+
+## Tecnologias Utilizadas
+ * React
+ * Redux
+ * React-router
+ * Css
+ * [PaperCss](https://www.getpapercss.com/)
+ * ESLint
 
 ### Intruções para instalar e executar o projeto.
 1. Clone o repositório:
