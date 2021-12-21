@@ -1,0 +1,28 @@
+const category = [
+  'General Knowledge',
+  'Books',
+  'Film',
+  'Music',
+  'Musicals and Theatres',
+  'Television',
+  'Video Games',
+  'Board Games',
+  'Science and Nature',
+  'Computers',
+  'Mathematics',
+  'Mythology',
+  'Sports',
+  'Geography',
+  'History',
+  'Politics',
+  'Art',
+  'Celebreties',
+  'Animals',
+  'Vehicles',
+  'Comics',
+  'Gadgets',
+  'Japanise Anime and Manga',
+  'Cartoon and Animations',
+];
+// categoryids = [9, 10, 11, 12];
+export default category;

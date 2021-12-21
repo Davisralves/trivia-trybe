@@ -1,7 +1,4 @@
-import {
-  SET_USER_DATA,
-  SET_FEEDBACK,
-  SET_SCORE } from '../Actions/index';
+import {  SET_FEEDBACK, SET_SCORE } from '../Actions/index';
 
 const INITIAL_STATE = {
   player: {
@@ -12,10 +9,10 @@ const INITIAL_STATE = {
   },
 };
 
-const userReducer = (state = INITIAL_STATE, {type, payload}) => {
+const userReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
   case SET_FEEDBACK:
-    const {name, email: gravatarEmail} = payload;
+    const { name, email: gravatarEmail } = payload;
     return {
       ...state,
       player: {

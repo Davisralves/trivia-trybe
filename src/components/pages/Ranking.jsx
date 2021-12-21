@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getPlayersRank, getGravatar } from '../../services/Api';
-import './Ranking.css';
+import './css/Ranking.css';
 
 const playerRank = (name, score, email) => (
   <div>

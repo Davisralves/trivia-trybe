@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { requestTriviaApi } from '../../services/Api';
-import './Game.css';
+import './css/Game.css';
 import Header from './Header';
 import Timer from '../Timer';
 
