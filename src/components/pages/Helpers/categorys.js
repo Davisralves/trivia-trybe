@@ -1,4 +1,5 @@
 const category = [
+  'Any',
   'General Knowledge',
   'Books',
   'Film',

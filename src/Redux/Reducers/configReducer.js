@@ -1,20 +1,21 @@
+/* eslint-disable no-case-declarations */
 import { RESET_DEFAULT, SET_NEW_CONFIG } from '../Actions/index';
 
-const INITIAL_STATE = {
-  category: '',
-  difficult: '',
+export const INITIAL_STATE = {
+  Category: '',
+  Difficult: '',
   questionType: '',
 };
 
 const configReducer = (state = INITIAL_STATE, { type, payload }) => {
-  const { category, difficult, questionType } = payload;
   switch (type) {
   case SET_NEW_CONFIG:
+    const { Category, Difficult, questionType } = payload;
     return (
       {
         ...state,
-        category,
-        difficult,
+        Category,
+        Difficult,
         questionType,
       }
     );
@@ -25,3 +26,5 @@ const configReducer = (state = INITIAL_STATE, { type, payload }) => {
     return state;
   }
 };
+
+export default configReducer;

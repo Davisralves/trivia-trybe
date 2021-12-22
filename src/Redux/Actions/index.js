@@ -14,6 +14,6 @@ export const setNewConfig = (payload) => ({
 });
 
 export const RESET_DEFAULT = 'RESET_DEFAULT';
-export const resetDefault = (payload) => ({
-  type: RESET_DEFAULT, payload,
+export const resetDefault = () => ({
+  type: RESET_DEFAULT, payload: 'null',
 });

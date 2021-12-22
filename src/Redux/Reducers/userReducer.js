@@ -1,4 +1,5 @@
-import {  SET_FEEDBACK, SET_SCORE } from '../Actions/index';
+/* eslint-disable no-case-declarations */
+import { SET_FEEDBACK, SET_SCORE } from '../Actions/index';
 
 const INITIAL_STATE = {
   player: {
