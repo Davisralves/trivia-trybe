@@ -11,20 +11,21 @@ import Buttons from '../Buttons';
 class Login extends Component {
   constructor(props) {
     super(props);
-
+    const { player: { name, gravatarEmail } } = props;
     this.state = {
-      player: { name: '', email: '' },
+      player: { name, email: gravatarEmail },
     };
-
+    console.log(name, gravatarEmail);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
+  handleChange({ target: { name, value } }) {
+    this.setState((state) => (
+      { player: {
+        ...state.player,
+        [name]: value,
+      } }));
   }
 
   async handleClick(path) {
@@ -37,7 +38,7 @@ class Login extends Component {
   }
 
   render() {
-    const { name, email } = this.state;
+    const { player: { name, email } } = this.state;
     return (
       <section className="App">
         <section className="input-login">
@@ -47,7 +48,8 @@ class Login extends Component {
               type="text"
               data-testid="input-player-name"
               name="name"
-              placeholder="Nome"
+              text={ name }
+              placeholder="Name"
               className="inputs"
               id="name-input"
               value={ name }
@@ -71,14 +73,14 @@ class Login extends Component {
             dataTestid="btn-play"
             id="button-form"
             onClick={ () => this.handleClick('/game') }
-            text="Jogar"
+            text="Play"
             className="gameNext"
           />
           <Link to="/settings">
             <Buttons
               dataTestid="btn-settings"
               id="button-config"
-              text="Configurar"
+              text="Configuration"
             />
           </Link>
         </section>
@@ -93,8 +95,11 @@ const mapDipatchToProps = (dispatch) => ({
   },
 });
 
+const mapStateToProps = ({ userReducer }) => ({
+  player: userReducer.player,
+});
 Login.propTypes = {
   dispatchSetValue: PropTypes.func,
 }.isRequired;
 
-export default connect(null, mapDipatchToProps)(Login);
+export default connect(mapStateToProps, mapDipatchToProps)(Login);

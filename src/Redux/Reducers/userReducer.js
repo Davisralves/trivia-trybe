@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
   case SET_FEEDBACK:
-    const { name, email: gravatarEmail } = payload;
+    const { player: { name, email: gravatarEmail } } = payload;
     return {
       ...state,
       player: {

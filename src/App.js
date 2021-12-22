@@ -11,13 +11,13 @@ class App extends Component {
   render() {
     return (
       <section>
-      <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route path="/settings" component={ Settings } />
-        <Route path="/game" component={ Game } />
-        <Route path="/feedback" component={ Feedback } />
-        <Route path="/ranking" component={ Ranking } />
-      </Switch>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/settings" component={ Settings } />
+          <Route path="/game" component={ Game } />
+          <Route path="/feedback" component={ Feedback } />
+          <Route path="/ranking" component={ Ranking } />
+        </Switch>
       </section>
     );
   }

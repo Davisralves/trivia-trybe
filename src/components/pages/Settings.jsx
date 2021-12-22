@@ -14,7 +14,7 @@ function Settings(props) {
   const { dispatchDefaultSettings, dispatchSettings, history } = props;
   return (
     <main>
-      <h1 data-testid="settings-title" className="textAlingCenter">Configurações</h1>
+      <h1 data-testid="settings-title" className="textAlingCenter">Configuration</h1>
       <div className="flexboxRow">
         <DropDown title="Category" items={ categorys } setSettings={ setSettings } />
         <DropDown title="Difficult" items={ difficults } setSettings={ setSettings } />

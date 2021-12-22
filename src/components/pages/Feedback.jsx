@@ -43,13 +43,23 @@ class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-play-again"
+          className="settingsButton"
           onClick={ () => history.push('/') }
         >
-          Jogar novamente
+          Home
+        </button>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          className="settingsButton"
+          onClick={ () => history.push('/game') }
+        >
+          Play Again
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
+          className="settingsButton"
           onClick={ () => this.handleRankingClick(name, score, email, history) }
         >
           Ranking
