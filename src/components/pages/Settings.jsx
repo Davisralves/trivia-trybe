@@ -11,7 +11,7 @@ function Settings(props) {
   const difficults = ['Any', 'Easy', 'Medium', 'Hard'];
   const types = ['Any', 'Multiple Choice', 'True or False'];
   const [settings, setSettings] = useState(INITIAL_STATE);
-  const { dispatchDefaultSettings, dispatchSettings } = props;
+  const { dispatchDefaultSettings, dispatchSettings, history } = props;
   return (
     <main>
       <h1 data-testid="settings-title" className="textAlingCenter">Configurações</h1>
@@ -23,16 +23,26 @@ function Settings(props) {
       <div className="flexboxCenter">
         <button
           type="button"
+          className="settingsButton"
+          onClick={ () => history.push('/') }
+        >
+          Login
+        </button>
+
+        <button
+          type="button"
           onClick={ dispatchDefaultSettings }
+          className="settingsButton"
         >
           Reset Default
         </button>
         <button
           type="button"
           onClick={ () => dispatchSettings(settings) }
+          className="settingsButton"
+
         >
           Save new Settings
-
         </button>
       </div>
     </main>
@@ -42,6 +52,7 @@ function Settings(props) {
 Settings.propTypes = {
   dispatchDefaultSettings: PropTypes.func.isRequired,
   dispatchSettings: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => (

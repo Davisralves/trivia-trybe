@@ -1,6 +1,9 @@
+/* eslint-disable max-statements */
 /* eslint-disable camelcase */
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { requestTriviaApi } from '../../services/Api';
 import './css/Game.css';
 import Header from './Header';
@@ -18,7 +21,7 @@ const innitialState = [
 ];
 
 // eslint-disable-next-line max-lines-per-function
-export default function Game() {
+function Game(props) {
   const [apiResponse, setApiResponse] = useState(innitialState);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disableButton, setdisbleButtons] = useState(false);
@@ -55,7 +58,8 @@ export default function Game() {
 
   const fetchApi = async () => {
     setLoading(true);
-    const { results } = await requestTriviaApi();
+    const { Category, Difficult, questionType } = props;
+    const { results } = await requestTriviaApi(`https://opentdb.com/api.php?amount=5&category=${Category}&difficulty=${Difficult}&type=${questionType}&token=`);
     setApiResponse(sortAnswers(results));
     setLoading(false);
     setTimer30seg();
@@ -169,3 +173,22 @@ export default function Game() {
     </main>
   );
 }
+
+const mapStateToProps = ({ configReducer }) => ({
+  Category: configReducer.Category,
+  Difficult: configReducer.Difficult,
+  questionType: configReducer.questionType,
+});
+
+Game.propTypes = {
+  Category: PropTypes.number,
+  Difficult: PropTypes.string,
+  questionType: PropTypes.string,
+};
+Game.defaultProps = {
+  Category: '',
+  Difficult: '',
+  questionType: '',
+};
+
+export default connect(mapStateToProps)(Game);
