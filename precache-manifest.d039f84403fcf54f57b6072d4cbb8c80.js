@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "72b25445db4a23e8ebd7e844f6908b5b",
+    "revision": "90a09c01020850a6a4d7e8c93980cfc9",
     "url": "/trivia-trybe/index.html"
   },
   {
-    "revision": "90f92ce486131b9c7b92",
-    "url": "/trivia-trybe/static/css/main.99994644.chunk.css"
+    "revision": "f6ea25a279b0744239ec",
+    "url": "/trivia-trybe/static/css/main.e4429f4d.chunk.css"
   },
   {
-    "revision": "0b826c35d3c8222124b8",
-    "url": "/trivia-trybe/static/js/2.3a1fe68c.chunk.js"
+    "revision": "2b7be120744f52f510c7",
+    "url": "/trivia-trybe/static/js/2.7aea5229.chunk.js"
   },
   {
     "revision": "5078ed3b90587f0ca34f00de2f5b1c42",
-    "url": "/trivia-trybe/static/js/2.3a1fe68c.chunk.js.LICENSE"
+    "url": "/trivia-trybe/static/js/2.7aea5229.chunk.js.LICENSE"
   },
   {
-    "revision": "90f92ce486131b9c7b92",
-    "url": "/trivia-trybe/static/js/main.8048e98b.chunk.js"
+    "revision": "f6ea25a279b0744239ec",
+    "url": "/trivia-trybe/static/js/main.47e6ee7e.chunk.js"
   },
   {
     "revision": "24cc4e6de6c1cf7fe4b6",
