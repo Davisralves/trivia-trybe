@@ -68,6 +68,10 @@
   border: 1px solid green;
 }
 
+a {
+  background: none;
+}
+
 @media ( prefers-reduced-motion : no-preference ) {
 
   .App-logo {

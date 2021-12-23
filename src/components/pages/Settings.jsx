@@ -49,7 +49,7 @@ function Settings(props) {
           onClick={ () => history.push('/') }
           disabled={ loading }
         >
-          Login
+          Home
         </button>
 
         <button
