@@ -20,11 +20,12 @@ class Header extends Component {
             alt="player"
           />
           <p
+            className="Headermargin"
             data-testid="header-player-name"
           >
             { player }
           </p>
-          <p data-testid="header-score">
+          <p data-testid="header-score" className="Headermargin">
             { score }
           </p>
         </div>
