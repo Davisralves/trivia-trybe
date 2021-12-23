@@ -8,6 +8,11 @@ export const setScore = (payload) => ({
   type: SET_SCORE, payload,
 });
 
+export const RESET_SCORE = 'RESET_SCORE';
+export const resetScore = (payload) => ({
+  type: RESET_SCORE, payload,
+});
+
 export const SET_NEW_CONFIG = 'SET_NEW_CONFIG';
 export const setNewConfig = (payload) => ({
   type: 'SET_NEW_CONFIG', payload,

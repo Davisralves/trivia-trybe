@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { SET_FEEDBACK, SET_SCORE } from '../Actions/index';
+import { SET_FEEDBACK, SET_SCORE, RESET_SCORE } from '../Actions/index';
 
 const INITIAL_STATE = {
   player: {
@@ -31,6 +31,16 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) => {
         assertions: player.assertions,
         score: player.score,
         gravatarEmail: player.gravatarEmail,
+      },
+    };
+  case RESET_SCORE:
+    console.log(state);
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        assertions: 0,
+        score: 0,
       },
     };
   default:

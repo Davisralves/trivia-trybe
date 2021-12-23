@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { resetScore } from '../../Redux/Actions';
 import { getPlayersRank, getGravatar } from '../../services/Api';
 import './css/Ranking.css';
 
@@ -18,7 +20,7 @@ const playerRank = (name, score, email) => (
 
 class Ranking extends React.Component {
   render() {
-    const { history } = this.props;
+    const { history, resetReducerScore } = this.props;
     return (
       <main className="App paper container-lg">
         <h1 data-testid="ranking-title"> Ranking </h1>
@@ -27,7 +29,7 @@ class Ranking extends React.Component {
         <button
           type="button"
           data-testid="btn-go-home"
-          onClick={ () => history.push('/') }
+          onClick={ () => { resetReducerScore(); history.push('/'); } }
         >
           Home
         </button>
@@ -42,4 +44,10 @@ Ranking.propTypes = {
   }),
 }.isRequired;
 
-export default Ranking;
+const mapDispatchToProps = (dispatch) => (
+  {
+    resetReducerScore: () => dispatch(resetScore()),
+  }
+);
+
+export default connect(null, mapDispatchToProps)(Ranking);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { resetScore } from '../../Redux/Actions/index';
 import Header from './Header';
 import { savePlayerRank } from '../../services/Api';
 
@@ -22,7 +23,7 @@ class Feedback extends Component {
 
   render() {
     const { goodResult, badResult, questionsAssert } = this.state;
-    const { name, email, score, assertions, history } = this.props;
+    const { name, email, score, assertions, history, resetReducerScore } = this.props;
     return (
       <section className="App paper container-lg">
         <Header />
@@ -44,7 +45,7 @@ class Feedback extends Component {
           type="button"
           data-testid="btn-play-again"
           className="settingsButton"
-          onClick={ () => history.push('/') }
+          onClick={ () => { resetReducerScore(); history.push('/'); } }
         >
           Home
         </button>
@@ -52,7 +53,7 @@ class Feedback extends Component {
           type="button"
           data-testid="btn-play-again"
           className="settingsButton"
-          onClick={ () => history.push('/game') }
+          onClick={ () => { resetReducerScore(); history.push('/game'); } }
         >
           Play Again
         </button>
@@ -81,6 +82,10 @@ const mapStateToProps = (state) => ({
   assertions: state.userReducer.player.assertions,
 });
 
-export default connect(
-  mapStateToProps,
-)(Feedback);
+const mapDispatchToProps = (dispatch) => (
+  {
+    resetReducerScore: () => dispatch(resetScore()),
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
