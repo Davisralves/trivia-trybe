@@ -26,7 +26,7 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
  <details>
   <summary>Login gif</summary>
  
-    ![/trivia-trybe/public/login.gif]
+    ![](/trivia-trybe/public/login.gif)
 </details>
 
 
