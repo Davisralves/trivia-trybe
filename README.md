@@ -24,12 +24,21 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
  O jogo tem uma tela de login que o usuario pode colocar seu nome e e-mail onde o e-mail é utilizado para fazer a requisição da foto do gravatar do usuario que aparece durante o jogo e na tela de feedBack através da api disponibilizada pelo site [Gravatar](https://br.gravatar.com/) onde pode ser fazer seu registro e ter sua foto de usuário dentro do jogo trivia.
  
   <details>
-  <summary>Login gif</summary>
+  <summary>Login Gif</summary>
    
    ![image](login.gif)
 </details>
 
+### Tela de Jogo:
+ O jogo contem 5 perguntas de dificuldades do facil ao dificil que podem ser de multipla escolha ou verdadeiro e falso onde o jogador faz pontos ao acertar cada pergunta baseados no tempo em que conseguiu acertar e na dificuldade da pergunta.
 
+  <details>
+  <summary>Gifs do Jogo</summary>
+   
+   
+   ![image](game.gif)
+   ![image](gametimeOut.gif)
+</details>
 
 
 ### Intruções para instalar e executar o projeto.
