@@ -21,7 +21,7 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
   
 
 ### Tela de Login:
- O jogo tem uma tela de login que o usuario pode colocar seu nome e e-mail onde o e-mail é utilizado para fazer a requisição da foto do gravatar do usuario que aparece durante o jogo e na tela de feedBack através da api disponibilizada pelo site [Gravatar](https://br.gravatar.com/) onde pode ser fazer seu registro e ter sua foto de usuário dentro do jogo trivia.
+ O jogo tem uma tela de login que o usuario pode colocar seu nome e e-mail onde o e-mail é utilizado para fazer a requisição da foto do gravatar do usuario que aparece durante o jogo e na tela de feedback através da api disponibilizada pelo site [Gravatar](https://br.gravatar.com/) onde pode ser fazer seu registro e ter sua foto de usuário dentro do jogo trivia.
  
   <details>
   <summary>Login Gif</summary>
