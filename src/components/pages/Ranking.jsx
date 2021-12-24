@@ -25,7 +25,7 @@ class Ranking extends React.Component {
       <main className="App paper container-lg">
         <h1 data-testid="ranking-title"> Ranking </h1>
         {getPlayersRank()
-          .map(({ name, score, picture }) => playerRank(name, score, picture))}
+          .map(({ name, score, email }) => playerRank(name, score, email))}
         <button
           type="button"
           data-testid="btn-go-home"
