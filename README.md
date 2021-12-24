@@ -37,6 +37,9 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
    
    
    ![image](game.gif)
+ 
+ 
+ 
    ![image](gametimeOut.gif)
 </details>
 
