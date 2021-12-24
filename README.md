@@ -68,6 +68,21 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
 </details>
 
 
+### Tela de Configurações:
+ A tela de configurações da 3 opções para configurar o jogo trivia que são por dificuldade, categoria e tipo da pergunta. 
+ Caso não exista perguntas suficientes para o tipo de configuração escolhida o jogador recebera uma mensagem avisando para escolhar outras configurações.
+ 
+  <details>
+  <summary>Gif das configurações</summary>
+   
+   ![image](configuracao.gif)
+ 
+ 
+ 
+   ![image](configuracaoerrada.gif)
+</details>
+
+
 ### Intruções para instalar e executar o projeto.
 1. Clone o repositório:
   * ``` git clone git@github.com:Davisralves/trivia-trybe.git ```
