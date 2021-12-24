@@ -43,6 +43,30 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
    ![image](gametimeOut.gif)
 </details>
 
+### Tela de Feedback:
+ A tela de feedback mostra o numero de acertos e deixa uma mensagem para o jogador baseado no número de acertos.
+
+
+  <details>
+  <summary>Gifs do Feedback</summary>
+   
+   
+   ![image](feedback.gif)
+ 
+ 
+ 
+   ![image](feedbackBest.gif)
+</details>
+
+### Tela de Ranking:
+ A tela de Ranking mostra o ranking do jogador e de todos os outros já jogados localmente.
+ 
+  <details>
+  <summary>Gif do Ranking</summary>
+   
+   ![image](ranking.gif)
+</details>
+
 
 ### Intruções para instalar e executar o projeto.
 1. Clone o repositório:
