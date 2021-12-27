@@ -21,7 +21,8 @@ function Settings(props) {
   const saveSettings = async () => {
     const { Category, Difficult, questionType } = settings || INITIAL_STATE;
     setLoading(true);
-    const response = await requestTriviaApi(`https://opentdb.com/api.php?amount=5&category=${Category}&difficulty=${Difficult}&type=${questionType}&token=`);
+    const URL = `https://opentdb.com/api.php?amount=5&category=${Category}&difficulty=${Difficult}&type=${questionType}&token=`;
+    const response = await requestTriviaApi(URL);
     setLoading(false);
     if (!response) { setValidated(false); }
     if (response) {
