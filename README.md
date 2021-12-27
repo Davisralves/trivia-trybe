@@ -44,7 +44,7 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
 </details>
 
 ### Tela de Feedback:
- A tela de feedback mostra o numero de acertos e deixa uma mensagem para o jogador baseado no número de acertos.
+ A tela de feedback mostra o número de acertos e deixa uma mensagem para o jogador baseado neles.
 
 
   <details>
@@ -59,7 +59,7 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
 </details>
 
 ### Tela de Ranking:
- A tela de Ranking mostra o ranking do jogador e de todos os outros já jogados localmente.
+ A tela de Ranking mostra o ranking dos jogadores.
  
   <details>
   <summary>Gif do Ranking</summary>
@@ -70,7 +70,7 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
 
 ### Tela de Configurações:
  A tela de configurações da 3 opções para configurar o jogo trivia que são por dificuldade, categoria e tipo da pergunta. 
- Caso não exista perguntas suficientes para o tipo de configuração escolhida o jogador recebera uma mensagem avisando para escolhar outras configurações.
+ Caso não exista perguntas suficientes para o tipo de configuração escolhida o jogador recebera uma mensagem o informando.
  
   <details>
   <summary>Gif das configurações</summary>
@@ -94,5 +94,5 @@ Projeto de criação de um jogo trivia em grupo com [Davi Alves](github.com/Davi
   * ``` npm start  (Uma nova pagina deve abrir no seu navegador com a aplicação funcionando) ```
 
 ## Status do projeto
- Em andamento.
+ Finalizado
 
