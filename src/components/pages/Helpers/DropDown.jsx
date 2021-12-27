@@ -5,8 +5,9 @@ import category from './categorys';
 
 // eslint-disable-next-line max-lines-per-function
 export default function DropDown(props) {
-  const { title, items, setSettings } = props;
-
+  const { title, items, setSettings,
+    settings: { Category, Difficult, questionType } } = props;
+  console.log(Category, Difficult, questionType);
   const saveQuestionType = (value) => {
     switch (value) {
     case 'Multiple Choice':
@@ -44,6 +45,15 @@ export default function DropDown(props) {
     if (title === 'Category') saveCategory(value);
   };
 
+  const getSelectValue = () => {
+    switch (title) {
+    case 'Category': return Category;
+    case 'Difficult': return Difficult;
+    case 'Question Type': return questionType;
+    default: return '';
+    }
+  };
+
   return (
     <label htmlFor="dropdown" className="label">
       {title}
@@ -54,14 +64,23 @@ export default function DropDown(props) {
         className="dropdown"
         onChange={ ({ target: { value } }) => setSettingsState(value) }
       >
-        {items.map((item, key) => <option key={ key }>{item}</option>)}
+        {items.map((item, key) => (
+          <option
+            selected={
+              item === getSelectValue() || (item === 'Any' && getSelectValue() === '')
+            }
+            key={ key }
+          >
+            {item}
+          </option>))}
       </select>
     </label>
   );
 }
 
 DropDown.propTypes = {
+  title: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSettings: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  settings: PropTypes.objectOf(PropTypes.string).isRequired,
 };

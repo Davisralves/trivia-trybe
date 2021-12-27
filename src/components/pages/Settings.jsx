@@ -38,9 +38,24 @@ function Settings(props) {
     <main>
       <h1 data-testid="settings-title" className="textAlingCenter">Configuration</h1>
       <div className="flexboxRow">
-        <DropDown title="Category" items={ categorys } setSettings={ setSettings } />
-        <DropDown title="Difficult" items={ difficults } setSettings={ setSettings } />
-        <DropDown title="Question Type" items={ types } setSettings={ setSettings } />
+        <DropDown
+          title="Category"
+          items={ categorys }
+          setSettings={ setSettings }
+          settings={ settings }
+        />
+        <DropDown
+          title="Difficult"
+          items={ difficults }
+          setSettings={ setSettings }
+          settings={ settings }
+        />
+        <DropDown
+          title="Question Type"
+          items={ types }
+          setSettings={ setSettings }
+          settings={ settings }
+        />
       </div>
       <div className="flexboxCenter">
         <button
@@ -54,7 +69,7 @@ function Settings(props) {
 
         <button
           type="button"
-          onClick={ dispatchDefaultSettings }
+          onClick={ () => { dispatchDefaultSettings(); setSettings(INITIAL_STATE); } }
           className="settingsButton"
           disabled={ loading }
         >
